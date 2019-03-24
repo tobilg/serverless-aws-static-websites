@@ -1,0 +1,40 @@
+Resources:
+  CustomAcmCertificateLambdaExecutionRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Statement:
+          - Action:
+              - sts:AssumeRole
+            Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+        Version: '2012-10-17'
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+        - arn:aws:iam::aws:policy/service-role/AWSLambdaRole
+      Policies:
+        - PolicyDocument:
+            Statement:
+              - Action:
+                  - acm:AddTagsToCertificate
+                  - acm:DeleteCertificate
+                  - acm:DescribeCertificate
+                  - acm:RemoveTagsFromCertificate
+                Effect: Allow
+                Resource:
+                  - 'arn:aws:acm:*:#{AWS::AccountId}:certificate/*'
+              - Action:
+                  - acm:RequestCertificate
+                  - acm:ListTagsForCertificate
+                  - acm:ListCertificates
+                Effect: Allow
+                Resource:
+                  - '*'
+              - Action:
+                  - route53:ChangeResourceRecordSets
+                Effect: Allow
+                Resource:
+                  - arn:aws:route53:::hostedzone/*
+            Version: '2012-10-17'
+          PolicyName: 'CustomAcmCertificateLambdaExecutionPolicy-${self:service.name}'

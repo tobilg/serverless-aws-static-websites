@@ -1,0 +1,16 @@
+Resources:
+  SSLCertificate:
+    Type: Custom::DNSCertificate
+    DependsOn:
+      - HostedZone
+    Properties:
+      DomainName: '${opt:domain}'
+      SubjectAlternativeNames:
+        - 'www.${opt:domain}'
+      ValidationMethod: DNS
+      # Needs to be in us-east-1 because of CloudFront limitations
+      Region: us-east-1
+      DomainValidationOptions:
+        - DomainName: '${opt:domain}'
+          HostedZoneId: '#{HostedZone}'
+      ServiceToken: '#{CustomAcmCertificateLambda.Arn}'

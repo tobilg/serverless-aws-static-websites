@@ -1,0 +1,30 @@
+Resources:
+  WebsiteBucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    DependsOn:
+      - WebsiteBucket
+    Properties:
+      Bucket:
+        Ref: WebsiteBucket
+      PolicyDocument:
+        Statement:
+          - Sid: PublicReadGetObject
+            Effect: Allow
+            Principal:
+              AWS:
+                Fn::Join:
+                  - " "
+                  - - "arn:aws:iam::cloudfront:user/CloudFront Origin Access Identity"
+                    - '#{CloudFrontOriginAccessIdentity}'
+            Action:
+              - s3:GetObject
+            Resource:
+              - Fn::Join: [
+                  '', [
+                    'arn:aws:s3:::',
+                    {
+                      'Ref': 'WebsiteBucket'
+                    },
+                    '/*'
+                  ]
+                ]

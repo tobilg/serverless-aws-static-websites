@@ -1,0 +1,8 @@
+# See https://docs.aws.amazon.com/de_de/AWSCloudFormation/latest/UserGuide/aws-resource-route53-hostedzone.html
+Resources:
+  HostedZone:
+    Type: "AWS::Route53::HostedZone"
+    Properties:
+      HostedZoneConfig:
+        Comment: 'Hosted zone for ${opt:domain}'
+      Name: '${opt:domain}'

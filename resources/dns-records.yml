@@ -1,0 +1,32 @@
+# See RecordSet: https://docs.aws.amazon.com/de_de/AWSCloudFormation/latest/UserGuide/aws-properties-route53-recordset.html
+# See AliasTarget: https://docs.aws.amazon.com/de_de/AWSCloudFormation/latest/UserGuide/aws-properties-route53-aliastarget.html
+# See https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region (below the first table for hosted zone ids / website endpoints of S3)
+Resources:
+  DnsRecord:
+    Type: 'AWS::Route53::RecordSet'
+    DependsOn:
+      - HostedZone
+    Properties:
+      Comment: 'Alias CloudFront for ${opt:domain}'
+      HostedZoneId: '#{HostedZone}'
+      Type: A
+      Name: '${opt:domain}'
+      AliasTarget:
+        # Generated domain name from CloudFront
+        DNSName: '#{CFDistribution.DomainName}'
+        # Default (static) hosted zone for CloudFront
+        HostedZoneId: 'Z2FDTNDATAQYW2'
+  WWWDnsRecord:
+    Type: 'AWS::Route53::RecordSet'
+    DependsOn:
+      - HostedZone
+    Properties:
+      Comment: 'Alias CloudFront for www.${opt:domain}'
+      HostedZoneId: '#{HostedZone}'
+      Type: A
+      Name: 'www.${opt:domain}'
+      AliasTarget:
+        # Generated domain name from CloudFront
+        DNSName: '#{CFDistribution.DomainName}'
+        # Default (static) hosted zone for CloudFront
+        HostedZoneId: 'Z2FDTNDATAQYW2'

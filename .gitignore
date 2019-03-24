@@ -1,3 +1,6 @@
+.idea
+.serverless
+
 # Logs
 logs
 *.log

@@ -1,0 +1,33 @@
+service:
+  name: static-website
+
+plugins:
+  - serverless-s3-sync
+  - serverless-pseudo-parameters
+
+custom:
+
+  # The domain name
+  domainName: ${opt:domain}
+
+  s3Sync:
+    - bucketName: ${opt:domain}
+      localDir: src
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+  region: us-east-1
+
+resources:
+
+  - ${file(resources/custom-acm-certificate-lambda.yml)}
+  - ${file(resources/custom-acm-certificate-lambda-role.yml)}
+  - ${file(resources/cloudfront-origin-access-identity.yml)}
+  - ${file(resources/s3-bucket.yml)}
+  - ${file(resources/s3-policies.yml)}
+  - ${file(resources/hosted-zone.yml)}
+  - ${file(resources/dns-records.yml)}
+  - ${file(resources/certificate.yml)}
+  - ${file(resources/cf-distribution.yml)}
+  #- ${file(resources/outputs.yml)}

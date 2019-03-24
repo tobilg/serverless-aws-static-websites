@@ -1,0 +1,22 @@
+{
+  "name": "serverless-aws-static-websites",
+  "version": "0.1.0",
+  "description": "A blueprint for deploying static websites on AWS with CloudFront, S3, ACM and Route53 via Serverless",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:tobilg/serverless-aws-static-websites.git"
+  },
+  "author": "",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/tobilg/serverless-aws-static-websites/issues"
+  },
+  "homepage": "https://github.com/tobilg/serverless-aws-static-websites#readme",
+  "devDependencies": {
+    "serverless-pseudo-parameters": "^2.4.0",
+    "serverless-s3-sync": "^1.7.3"
+  }
+}

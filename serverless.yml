@@ -4,12 +4,25 @@ service:
 plugins:
   - serverless-s3-sync
   - serverless-pseudo-parameters
+  - serverless-stack-output
+  - serverless-cloudfront-invalidate
 
 custom:
 
-  # The domain name
+  # The domain name to be used
   domainName: ${opt:domain}
 
+  # Output plugin configuration
+  output:
+    handler: modules/output.handler
+
+  # CloudFront invalidation plugin configuration
+  cloudfrontInvalidate:
+    distributionIdKey: 'CloudFrontDistributionId'
+    items: # Add your files to invalidate here:
+      - '/index.html'
+
+  # S3 sync plugin configuration
   s3Sync:
     - bucketName: ${opt:domain}
       localDir: src
@@ -17,7 +30,7 @@ custom:
 provider:
   name: aws
   runtime: nodejs8.10
-  region: us-east-1
+  region: ${opt:region, 'us-east-1'}
 
 resources:
 

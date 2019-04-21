@@ -30,7 +30,7 @@ You can deploy your static website with the following command:
 $ sls deploy --domain yourdomain.yourtld
 ```
 
-where `yourdomain.yourtld` needs to be replaced with your actual domain name.
+where `yourdomain.yourtld` needs to be replaced with your actual domain name. You can also specify a AWS region via the `--region` flag, otherwise `us-east-1` will be used.
 
 #### Manual update of DNS records on first deploy
 On the first deploy, it is necessary to update the DNS setting for the domain manually, otherwise the hosted zone will not be able to be established.
@@ -48,7 +48,7 @@ ns-32.awsdns-04.com.
 
 You should then update your DNS settings for your domain with those values, **otherwise the stack creation process will fail**.
 
-This is a bit misfortunate, but to the best of knowledge there's currently no other way possible if you use AWS external (non-Route53) domains.
+This is a bit misfortunate, but to the best of knowledge there's currently no other way possible if you use AWS external (non-Route53) domains. During my tests with [namecheap.com](https://www.namecheap.com) domains the DNS records were always updated fast enough, so that the stack creation didn't fail.
 
 #### Deployment process time
 As a new CloudFront distribution is created (which is pretty slow), it can take **up to 45min** for the initial deploy to finish. This is normal and expected behavior.
@@ -59,7 +59,11 @@ If the deployment finished successfully, you will be able to access your domain 
 This setup should give you some good [PageSpeed Insights](https://developers.google.com/speed/pagespeed/insights/?hl=en) results.
 
 ### Updates
-For every update of your website, you can trigger a deploy as stated above.
+For every update of your website, you can trigger a deploy as stated above. This will effectively just do s S3 sync of the `src` folder. 
+
+As **CloudFront caches the contents of the website**, a [Serverless plugin](https://github.com/aghadiry/serverless-cloudfront-invalidate) is used to invalidate files. This [may incur costs](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Invalidation.html#PayingForInvalidation), see the [docs](https://aws.amazon.com/de/premiumsupport/knowledge-center/cloudfront-serving-outdated-content-s3/) for more info. 
+
+You can run `sls cloudfrontInvalidate` to do a standalone invalidation of the defined files in the `serverless.yml`.
 
 ## Removal
 If you want to remove the created stack, your will have to delete all records of the Hosted Zone of the respective domain except the `SOA` and `NS` records, otherwise the stack deletion via

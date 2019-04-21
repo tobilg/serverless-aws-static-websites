@@ -9,7 +9,7 @@ Resources:
       Handler: index.handler
       Role: '#{CustomAcmCertificateLambdaExecutionRole.Arn}'
       Runtime: python3.6
-      Timeout: 300
+      Timeout: 900
       Code:
         ZipFile: "T=RuntimeError\nimport copy,hashlib as s,json,logging as B,time\n\
           from boto3 import client as L\nfrom botocore.exceptions import ClientError\

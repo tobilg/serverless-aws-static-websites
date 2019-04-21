@@ -1,5 +1,5 @@
 service:
-  name: static-website
+  name: ${file(./modules/sanitizeStackName.js):sanitize}
 
 plugins:
   - serverless-s3-sync
@@ -30,4 +30,4 @@ resources:
   - ${file(resources/dns-records.yml)}
   - ${file(resources/certificate.yml)}
   - ${file(resources/cf-distribution.yml)}
-  #- ${file(resources/outputs.yml)}
+  - ${file(resources/outputs.yml)}

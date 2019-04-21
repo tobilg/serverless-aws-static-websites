@@ -1,4 +1,7 @@
 Outputs:
   HostedZoneNameservers:
     Description: The nameservers for the Hosted Zone (to be used with your external DNS configuration)
-    Value: '#{HostedZone.NameServers}'
+    Value:
+      'Fn::Join':
+        - ', '
+        - 'Fn::GetAtt': ['HostedZone', 'NameServers']

@@ -1,6 +1,6 @@
 Resources:
   SSLCertificate:
-    Type: Custom::DNSCertificate
+    Type: 'Custom::DNSCertificate'
     DependsOn:
       - HostedZone
     Properties:

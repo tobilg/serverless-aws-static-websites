@@ -1,6 +1,6 @@
 Resources:
   CustomAcmCertificateLambda:
-    Type: AWS::Lambda::Function
+    Type: 'AWS::Lambda::Function'
     Metadata:
       Source: https://github.com/dflook/cloudformation-dns-certificate
       Version: 1.7.0

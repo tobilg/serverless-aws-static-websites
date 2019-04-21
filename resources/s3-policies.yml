@@ -13,8 +13,8 @@ Resources:
             Principal:
               AWS:
                 Fn::Join:
-                  - " "
-                  - - "arn:aws:iam::cloudfront:user/CloudFront Origin Access Identity"
+                  - ' '
+                  - - 'arn:aws:iam::cloudfront:user/CloudFront Origin Access Identity'
                     - '#{CloudFrontOriginAccessIdentity}'
             Action:
               - s3:GetObject

@@ -1,6 +1,6 @@
 Resources:
   CustomAcmCertificateLambdaExecutionRole:
-    Type: AWS::IAM::Role
+    Type: 'AWS::IAM::Role'
     Properties:
       AssumeRolePolicyDocument:
         Statement:

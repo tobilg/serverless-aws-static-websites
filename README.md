@@ -11,7 +11,7 @@ All set up via one [Serverless](https://www.serverless.com) command and minimum 
 * A S3 bucket containing your static website
 * A CloudFront distribution for global hosting via CDN
 * A HostedZone on Route53 with A records for your domain name
-* A Lambda function for automatic SSL certificate generation via ACM for your domain name
+* A Lambda function for automatic SSL certificate generation via ACM for your domain name (run once upon deployment)
 
 ## Preconditions
 This guide assumes that you have a pre-existing domain which you want to use for hosting your static website. Furthermore, you need to have access to the domain's DNS configuration.
@@ -70,6 +70,8 @@ This setup should give you some good [PageSpeed Insights](https://developers.goo
 
 ### Updates
 For every update of your website, you can trigger a deploy as stated above. This will effectively just do s S3 sync of the `src` folder. 
+
+To do a manual sync, your can also use `sls s3sync`. There's also the possibility to customize the caching behavior for individual files or file types via the `serverless.yml`, see the [s3sync plugin's documentation](https://www.npmjs.com/package/serverless-s3-sync#setup).
 
 As **CloudFront caches the contents of the website**, a [Serverless plugin](https://github.com/aghadiry/serverless-cloudfront-invalidate) is used to invalidate files. This [may incur costs](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Invalidation.html#PayingForInvalidation), see the [docs](https://aws.amazon.com/de/premiumsupport/knowledge-center/cloudfront-serving-outdated-content-s3/) for more info. 
 

@@ -1,7 +1,7 @@
 {
   "name": "serverless-aws-static-websites",
   "version": "0.1.0",
-  "description": "A blueprint for deploying static websites on AWS with CloudFront, S3, ACM and Route53 via Serverless",
+  "description": "Deploy your static websites without all the hassle on AWS with CloudFront, S3, ACM and Route53 via Serverless",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

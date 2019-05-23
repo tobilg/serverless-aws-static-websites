@@ -1,7 +1,17 @@
 # serverless-aws-static-websites
-A blueprint for hosting static websites on AWS with CloudFront, S3, ACM and Route53.
+Host your static website on AWS via S3, with global CDN via CloudFront, using SSL certificates provided by ACM using your own domain name!
 
-It will host your static website on S3, completely with SSL certificates, `www`-subdomain redirection and a CloudFront distribution.
+All set up via one [Serverless](https://www.serverless.com) command and minimum manual configuration!
+
+## Architecture
+
+![Serverless static websites on AWS](docs/architecture.png)[]()
+
+### What is provisioned in your AWS account?
+* A S3 bucket containing your static website
+* A CloudFront distribution for global hosting via CDN
+* A HostedZone on Route53 with A records for your domain name
+* A Lambda function for automatic SSL certificate generation via ACM for your domain name
 
 ## Preconditions
 This guide assumes that you have a pre-existing domain which you want to use for hosting your static website. Furthermore, you need to have access to the domain's DNS configuration.
@@ -12,7 +22,7 @@ Also, you need to have an install of [Serverless](https://www.serverless.com) on
 To use this blueprint with your own static websites, you can fork this repo in GitHub and then customize it to match your needs.
 
 ### Fork and clone
-One you forked the repo, you can clone it locally via
+One you forked the repo on GitHub, you can clone it locally via
 
 ```bash
 $ git clone git@github.com:youraccount/yourrepo.git
@@ -50,7 +60,7 @@ You should then update your DNS settings for your domain with those values, **ot
 
 This is a bit misfortunate, but to the best of knowledge there's currently no other way possible if you use AWS external (non-Route53) domains. During my tests with [namecheap.com](https://www.namecheap.com) domains the DNS records were always updated fast enough, so that the stack creation didn't fail.
 
-#### Deployment process time
+#### Deployment process duration
 As a new CloudFront distribution is created (which is pretty slow), it can take **up to 45min** for the initial deploy to finish. This is normal and expected behavior.
 
 ### Post-deploy

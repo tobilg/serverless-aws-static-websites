@@ -1,5 +1,6 @@
 .idea
 .serverless
+.DS_Store
 
 # Logs
 logs

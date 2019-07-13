@@ -19,10 +19,24 @@ This guide assumes that you have a pre-existing domain which you want to use for
 Also, you need to have an install of [Serverless](https://www.serverless.com) on your machine.
 
 ## How-to
-To use this blueprint with your own static websites, you can fork this repo in GitHub and then customize it to match your needs.
+To use this blueprint with your own static websites, you can follow the steps below to get started.
 
-### Fork and clone
-One you forked the repo on GitHub, you can clone it locally via
+### Set up a Serverless project for your static website
+There are basically two ways to get started, either use [Serverless](https://www.serverless.com) to generate a basic project structure, or use the "traditional" fork and clone mechanisms.
+
+#### Use Serverless templates
+
+The following command will create a local project structure you can use to deploy your static website in the `mystaticwebsite` folder relative to your current working directory:
+
+```bash
+$ sls create --template-url https://github.com/tobilg/serverless-aws-static-websites --path mystaticwebsite
+Serverless: Generating boilerplate...
+Serverless: Downloading and installing "serverless-aws-static-websites"...
+Serverless: Successfully installed "serverless-aws-static-websites"
+```
+
+#### Fork and clone
+Once you forked the repo on GitHub, you can clone it locally via
 
 ```bash
 $ git clone git@github.com:youraccount/yourrepo.git

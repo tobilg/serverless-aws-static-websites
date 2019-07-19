@@ -25,7 +25,6 @@ To use this blueprint with your own static websites, you can follow the steps be
 There are basically two ways to get started, either use [Serverless](https://www.serverless.com) to generate a basic project structure, or use the "traditional" fork and clone mechanisms.
 
 #### Use Serverless templates
-
 The following command will create a local project structure you can use to deploy your static website in the `mystaticwebsite` folder relative to your current working directory:
 
 ```bash
@@ -35,6 +34,9 @@ Serverless: Downloading and installing "serverless-aws-static-websites"...
 Serverless: Successfully installed "serverless-aws-static-websites"
 ```
 
+**Hint**  
+When using this method, Serverless is replacing the `service.name` in the `serverless.yml` file automatically with `mystaticwebiste`. If you want to use a different stack name, you have to replace it manually. You also need to take care of that the stack name is using only allowed characters. When using the "Fork and clone" method below, the stack name is automatically derived from the domain name and sanitized regarding the allowed characters.
+
 #### Fork and clone
 Once you forked the repo on GitHub, you can clone it locally via
 
@@ -43,6 +45,15 @@ $ git clone git@github.com:youraccount/yourrepo.git
 ```
 
 where `youraccount/yourrepo` needs to be replaced with the actual repository name of your forked repo.
+
+### Install dependencies
+To install the dependencies, do a 
+
+```bash
+$ npm i
+```
+
+After that, the project is usable.
 
 ### Create your static website
 You can now create your static website in the `src` folder of your cloned repo.

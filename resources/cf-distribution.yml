@@ -29,6 +29,7 @@ Resources:
             - HEAD
             - OPTIONS
           TargetOriginId: S3BucketOrigin
+          Compress: true
           ForwardedValues:
             QueryString: 'false'
             Cookies:

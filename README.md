@@ -103,7 +103,7 @@ As **CloudFront caches the contents of the website**, a [Serverless plugin](http
 You can run `sls cloudfrontInvalidate` to do a standalone invalidation of the defined files in the `serverless.yml`.
 
 ## Removal
-If you want to remove the created stack, your will have to delete all records of the Hosted Zone of the respective domain except the `SOA` and `NS` records, otherwise the stack deletion via
+If you want to remove the created stack, you will have to delete all records of the Hosted Zone of the respective domain except the `SOA` and `NS` records, otherwise the stack deletion via
 
 ```bash
 $ sls remove --domain yourdomain.yourtld
